@@ -1,5 +1,17 @@
 {
+  "name": "Remont",
+  "version": "1.0.0",
+  "description": "Web app",
+  "author": "Roman Zhernosek <zhernosek.roman@gmail.com>",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "dev": "webpack-dev-server --port 3000"
+  },
   "devDependencies": {
-    "webpack": "^2.2.1"
+    "html-webpack-plugin": "^2.28.0",
+    "regenerator-runtime": "^0.10.1",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0"
   }
 }
