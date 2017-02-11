@@ -47,8 +47,7 @@ module.exports = {
         query: {
           presets: ['es2015', 'stage-0', 'react'],
           plugins: [
-            'transform-decorators-legacy',
-            '@mangojuice/core/babel/proxy'
+            'transform-decorators-legacy'
           ]
         }
       },
