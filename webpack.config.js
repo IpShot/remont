@@ -55,7 +55,7 @@ module.exports = {
         test: /\.css$/,
         loader: [
           'style-loader',
-          'css-loader?modules',
+          'css-loader?modules&importLoaders=1&localIdentName=[local]--[hash:base64:6]',
           'cssnext-loader'
         ]
       }
@@ -65,7 +65,8 @@ module.exports = {
   resolve: {
     modules: [
       'node_modules',
-      path.resolve(__dirname)
+      path.resolve(__dirname),
+      path.resolve(__dirname, 'src')
     ],
     // alias: {
     //   'react': 'preact-compat/dist/preact-compat',
