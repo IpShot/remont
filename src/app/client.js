@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import Root from './components/Root';
+import store from './store';
 
-const Root = () => (
-  <div>
-    Привет! Я Валера и я сделаю вам крутейший ремонт!
-  </div>
+ReactDOM.render(
+  <Provider store={store}>
+    <Root />
+  </Provider>
+  , document.getElementById('content')
 );
-
-ReactDOM.render(<Root />, document.getElementById('content'));

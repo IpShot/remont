@@ -1,8 +1,8 @@
-var path = require('path');
-var webpack = require("webpack");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-var SOURCE_DIR = path.resolve(__dirname + '/src');
+const SOURCE_DIR = path.resolve(__dirname + '/src');
 
 module.exports = {
   devtool: 'source-map',
@@ -53,7 +53,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader!cssnext-loader'
+        loader: [
+          'style-loader',
+          'css-loader?modules',
+          'cssnext-loader'
+        ]
       }
     ]
   },
