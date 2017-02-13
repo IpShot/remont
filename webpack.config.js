@@ -68,10 +68,6 @@ module.exports = {
       path.resolve(__dirname),
       path.resolve(__dirname, 'src')
     ],
-    // alias: {
-    //   'react': 'preact-compat/dist/preact-compat',
-    //   'react-dom': 'preact-compat/dist/preact-compat'
-    // }
   },
 
   devServer: {

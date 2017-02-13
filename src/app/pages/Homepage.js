@@ -7,6 +7,6 @@ const Homepage = ({ brandName }) => (
   <Hello brandName={brandName} />
 );
 
-const map = ({ brandName }) => ({ brandName });
-
-export default connect(map)(Homepage);
+export default connect(
+  ({ brandName }) => ({ brandName })
+)(Homepage);
