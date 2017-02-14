@@ -1,24 +1,16 @@
+import { delay } from 'redux-saga';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { setInit } from 'app/actions/lesson';
-import {
-  FETCH_DESIGNS,
-  FETCH_DESIGNS_SUCCEEDED,
-  FETCH_DESIGNS_FAILED,
-} from 'app/constants';
+import { fetchDesignsSuccess, fetchDesignsError } from 'app/actions/designs';
+import { FETCH_DESIGNS } from 'app/constants';
 
 
 function* fetchDesigns(action) {
   try {
-    const user = yield call(fakeFetch, action.payload);
-    yield put({
-      type: FETCH_DESIGNS_SUCCEEDED,
-      designs,
-    });
+    yield call(delay, 1000);
+    const designs = [1, 2, 3];
+    yield put(fetchDesignsSuccess(designs));
   } catch (e) {
-    yield put({
-      type: FETCH_DESIGNS_FAILED,
-      error: e.message,
-    });
+    yield put(fetchDesignsError(e.message));
   }
 }
 
