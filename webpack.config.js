@@ -53,7 +53,8 @@ module.exports = {
         query: {
           presets: ['es2015', 'stage-0', 'react'],
           plugins: [
-            'transform-decorators-legacy'
+            'transform-decorators-legacy',
+            'dynamic-import-webpack'
           ]
         }
       },
