@@ -1,8 +1,8 @@
-const path = require('path');
-const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+var path = require('path');
+var webpack = require("webpack");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const SOURCE_DIR = path.resolve(__dirname + '/src');
+var SOURCE_DIR = path.resolve(__dirname + '/src');
 
 module.exports = {
   devtool: 'source-map',
@@ -23,6 +23,12 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+      __CLIENT__: true,
+      __SERVER__: false,
+      __PRODUCTION__: false,
+      __DEV__: true
+    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false },
       sourceMap: true

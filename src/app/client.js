@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import { addLocaleData } from 'react-intl';
 import Root from './pages/Root';
-import store from './store';
+import configureStore from './store';
+import ruMessages from './translations/ru_RU';
 
 
-export const renderApp = (locale, messages) => {
+const renderApp = (locale, messages) => {
+  addLocaleData(require(`react-intl/locale-data/${locale.slice(0, 2)}`));
+
   const store = configureStore({
     i18n: {
       messages,
@@ -28,7 +32,7 @@ export const renderApp = (locale, messages) => {
 };
 
 // Load polyfills and run the app
-export const init = (...args) => {
+const init = (...args) => {
   // Polyfill Intl and only serve it if the browser needs it
   // @see https://github.com/andyearnshaw/Intl.js/issues/118#issuecomment-120123392
   if (!window.Intl) {
@@ -40,3 +44,5 @@ export const init = (...args) => {
     renderApp(...args);
   }
 };
+
+init('ru_RU', ruMessages);
