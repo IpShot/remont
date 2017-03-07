@@ -47,15 +47,23 @@ const finalCreateStore = compose(
 export default function configureStore(initialState) {
   const reducer = createCombinedReducer();
   const store = finalCreateStore(reducer, initialState);
-  sagaMiddleware.run(rootSaga);
+  let sagas = sagaMiddleware.run(rootSaga);
 
-  // Enable Webpack hot module replacement for reducers
+  // Enable Webpack hot module replacement for reducers and sagas
   // in dev mode if HMR available
   if (process.env.NODE_ENV === 'development') {
     if (module.hot) {
       module.hot.accept(redRequire.id, () => {
         const nextReducer = createCombinedReducer();
         store.replaceReducer(nextReducer);
+      });
+
+      module.hot.accept('app/sagas/rootSaga', () => {
+        const newSagas = require('app/sagas/rootSaga').default;
+        sagas.cancel();
+        sagas.done.then(() => {
+          sagas = sagaMiddleware.run(newSagas)
+        });
       });
     }
   }

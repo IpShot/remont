@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { addLocaleData } from 'react-intl';
+import { AppContainer } from 'react-hot-loader';
 import Root from './pages/Root';
 import configureStore from './store';
 import ruMessages from './translations/ru_RU';
@@ -23,12 +23,25 @@ const renderApp = (locale, messages) => {
     browserHistory, store
   );
 
-  ReactDOM.render(
-    <Provider store={store}>
-      <Root history={reduxHistroy} />
-    </Provider>
-    , document.getElementById('content')
-  );
+  const render = () => {
+    ReactDOM.render(
+      <AppContainer>
+        <Root store={store} history={reduxHistroy} />
+      </AppContainer>
+      , document.getElementById('content')
+    );
+  };
+
+  render();
+
+  // Enable Webpack hot module replacement
+  if (process.env.NODE_ENV === 'development') {
+    if (module.hot) {
+      module.hot.accept('./pages/Root', () => {
+        render();
+      });
+    }
+  }
 };
 
 // Load polyfills and run the app

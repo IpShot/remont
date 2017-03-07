@@ -10,7 +10,8 @@ module.exports = function({ prod } = {}) {
 
     entry: {
       app: [].concat(
-        prod ? [] : `webpack-dev-server/client?/`,
+        prod ? [] : 'react-hot-loader/patch',
+        prod ? [] : 'webpack-dev-server/client?/',
         prod ? [] : 'webpack/hot/only-dev-server',
         'regenerator-runtime/runtime',
         './src/app/client.js'
@@ -49,7 +50,7 @@ module.exports = function({ prod } = {}) {
           include: [ SOURCE_DIR ],
           exclude: [/node_modules/],
           query: {
-            presets: ['es2015', 'stage-0', 'react'],
+            presets: [["es2015", {"modules": false}], 'stage-0', 'react'],
             plugins: [
               'transform-decorators-legacy',
               'dynamic-import-webpack'
@@ -70,8 +71,7 @@ module.exports = function({ prod } = {}) {
     resolve: {
       modules: [
         'node_modules',
-        path.resolve(__dirname),
-        path.resolve(__dirname, 'src')
+        SOURCE_DIR
       ],
     },
 
