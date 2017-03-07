@@ -32,7 +32,7 @@ const middlewares = [
   sagaMiddleware,
 ];
 
-if (__DEV__) {
+if (process.env.NODE_ENV === 'development') {
   const { persistState } = require('redux-devtools');
   storeEnhancers.push(
     persistState(window.location.href.match(/[?&]debug_session=([^&])\b/))
@@ -51,7 +51,7 @@ export default function configureStore(initialState) {
 
   // Enable Webpack hot module replacement for reducers
   // in dev mode if HMR available
-  if (__DEV__) {
+  if (process.env.NODE_ENV === 'development') {
     if (module.hot) {
       module.hot.accept(redRequire.id, () => {
         const nextReducer = createCombinedReducer();

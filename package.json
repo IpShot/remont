@@ -1,10 +1,11 @@
 {
   "name": "Remont",
   "version": "1.0.0",
-  "description": "Web app",
+  "description": "React-Redux boilerplate",
   "author": "Roman Zhernosek <zhernosek.roman@gmail.com>",
+  "license": "MIT",
   "scripts": {
-    "build": "webpack",
+    "build": "rimraf build && webpack --env.prod 1",
     "watch": "webpack --watch",
     "dev": "webpack-dev-server --port 3000"
   },
