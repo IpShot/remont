@@ -20,7 +20,7 @@ module.exports = function({ prod } = {}) {
 
     output: {
       publicPath: '/',
-      path: path.resolve(__dirname, '/build'),
+      path: path.resolve(__dirname, 'build'),
       filename: '[name].js'
     },
 

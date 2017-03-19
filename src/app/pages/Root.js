@@ -5,13 +5,18 @@ import AppRoute from './AppRoute';
 import Homepage from './Homepage';
 
 
+// To avoid change routes warning on hot reload
+const routes = (
+  <Route path="/" component={AppRoute}>
+    <IndexRoute component={Homepage} />
+    <Route path="homepage" component={Homepage} />
+  </Route>
+);
+
 const Root = ({ store, history }) => (
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={AppRoute}>
-        <IndexRoute component={Homepage} />
-        <Route path="homepage" component={Homepage} />
-      </Route>
+      {routes}
     </Router>
   </Provider>
 );
