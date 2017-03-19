@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require("webpack");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var SOURCE_DIR = path.resolve(__dirname + '/src');
 
@@ -29,6 +30,7 @@ module.exports = function({ prod } = {}) {
         compress: { warnings: false },
         sourceMap: true
       }),
+      !prod ? [] : new ExtractTextPlugin('app.css'),
       prod ? [] : new webpack.NamedModulesPlugin(),
       prod ? [] : new webpack.HotModuleReplacementPlugin(),
       new webpack.DefinePlugin({
@@ -59,7 +61,13 @@ module.exports = function({ prod } = {}) {
         },
         {
           test: /\.css$/,
-          loader: [
+          loader: prod ? ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+              'css-loader?modules&importLoaders=1&localIdentName=[local]--[hash:base64:6]&minimize',
+              'cssnext-loader'
+            ]
+          }) : [
             'style-loader',
             'css-loader?modules&importLoaders=1&localIdentName=[local]--[hash:base64:6]',
             'cssnext-loader'
