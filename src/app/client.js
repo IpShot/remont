@@ -23,22 +23,23 @@ const renderApp = (locale, messages) => {
     browserHistory, store
   );
 
-  const render = () => {
+  const render = (Component) => {
     ReactDOM.render(
       <AppContainer>
-        <Root store={store} history={reduxHistroy} />
+        <Component store={store} history={reduxHistroy} />
       </AppContainer>
       , document.getElementById('content')
     );
   };
 
-  render();
+  render(Root);
 
   // Enable Webpack hot module replacement
   if (process.env.NODE_ENV === 'development') {
     if (module.hot) {
       module.hot.accept('./pages/Root', () => {
-        render();
+        const newRoot = require('./pages/Root').default;
+        render(newRoot);
       });
     }
   }
