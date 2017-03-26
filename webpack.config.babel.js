@@ -65,12 +65,12 @@ module.exports = function({ prod } = {}) {
             fallback: 'style-loader',
             use: [
               'css-loader?modules&importLoaders=1&localIdentName=[local]--[hash:base64:6]&minimize',
-              'cssnext-loader'
+              'postcss-loader'
             ]
           }) : [
             'style-loader',
             'css-loader?modules&importLoaders=1&localIdentName=[local]--[hash:base64:6]',
-            'cssnext-loader'
+            'postcss-loader'
           ]
         }
       ]
